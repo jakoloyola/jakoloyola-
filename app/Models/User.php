@@ -32,4 +32,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    
+    public function user_facilities()
+    {
+        return $this->hasMany(UserFacility::class);
+    }  
+    
+    public function user_roles()
+    {
+        return $this->hasMany(UserRole::class);
+    }  
 }

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserFacility;
+use App\Models\UserRole;
 
 class UserController extends Controller
 {
@@ -34,7 +36,9 @@ class UserController extends Controller
 
     public function index()
     {        
-        $users = User::latest()->paginate(10);
+        $users = User::with('user_facilities.facility')
+            ->with('user_roles.role')
+            ->latest()->paginate(10);
         
         return response()->json($users);
     }
@@ -58,7 +62,30 @@ class UserController extends Controller
             $request['password'] = Hash::make($request['password']);
         }
 
-        if(User::create($request->all())){
+        if($user = User::create($request->all())){            
+
+            if(!empty($request['roles'])){
+                foreach($request['roles'] as $role){
+                    $data = [
+                        'user_id' => $user->id,
+                        'role_id' => $role,
+                    ];
+
+                    UserRole::create($data);
+                }
+            }
+            
+            if(!empty($request['facilities'])){
+                foreach($request['facilities'] as $facility){
+                    $data = [
+                        'user_id' => $user->id,
+                        'facility_id' => $facility,
+                    ];
+
+                    UserFacility::create($data);
+                }
+            }
+
             return response()->json('success');
         }
 
@@ -93,7 +120,9 @@ class UserController extends Controller
     
     public function show(Request $request, User $userId)
     {        
-        $user = User::find($userId)->first();
+        $user = User::with('user_facilities.facility')
+            ->with('user_roles.role')
+            ->find($userId)->first();
         
         return response()->json($user);
     }

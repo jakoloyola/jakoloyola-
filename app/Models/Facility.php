@@ -18,4 +18,9 @@ class Facility extends Model
         'zip',
         'contact',
     ];
+    
+    public function user_facilities()
+    {
+        return $this->hasMany(UserFacility::class);
+    }  
 }
