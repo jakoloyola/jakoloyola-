@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,9 @@ Route::post('facilities/store', [FacilityController::class, 'store'])->middlewar
 Route::put('facilities/update/{facilityId}', [FacilityController::class, 'update'])->middleware('auth:sanctum');
 Route::get('facilities/show/{facilityId}', [FacilityController::class, 'show'])->middleware('auth:sanctum');
 Route::delete('facilities/destroy/{facilityId}', [FacilityController::class, 'destroy'])->middleware('auth:sanctum');
+
+Route::get('roles', [RoleController::class, 'index'])->middleware('auth:sanctum');
+Route::post('roles/store', [RoleController::class, 'store'])->middleware('auth:sanctum');
+Route::put('roles/update/{roleId}', [RoleController::class, 'update'])->middleware('auth:sanctum');
+Route::get('roles/show/{roleId}', [RoleController::class, 'show'])->middleware('auth:sanctum');
+Route::delete('roles/destroy/{roleId}', [RoleController::class, 'destroy'])->middleware('auth:sanctum');
