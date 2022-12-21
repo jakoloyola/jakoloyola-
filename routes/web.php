@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FacilityController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,18 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
-Route::post('users/store', [UserController::class, 'store'])->middleware('auth:sanctum');
-Route::put('users/update/{userId}', [UserController::class, 'update'])->middleware('auth:sanctum');
-Route::get('users/show/{userId}', [UserController::class, 'show'])->middleware('auth:sanctum');
-Route::delete('users/destroy/{userId}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
+Route::get('users', [UserController::class, 'index']);
+Route::post('users/store', [UserController::class, 'store']);
+Route::put('users/update/{userId}', [UserController::class, 'update']);
+Route::get('users/show/{userId}', [UserController::class, 'show']);
+Route::delete('users/destroy/{userId}', [UserController::class, 'destroy']);
+
+
+Route::get('facilities', [FacilityController::class, 'index']);
+Route::post('facilities/store', [FacilityController::class, 'store']);
+Route::put('facilities/update/{facilityId}', [FacilityController::class, 'update']);
+Route::get('facilities/show/{facilityId}', [FacilityController::class, 'show']);
+Route::delete('facilities/destroy/{facilityId}', [FacilityController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('layout');
