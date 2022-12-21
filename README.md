@@ -1,4 +1,4 @@
-DB:
+DATABASE ENV CONNECTION:
 
 Database: seditio
 
