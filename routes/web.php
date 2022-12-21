@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
+Route::post('users/store', [UserController::class, 'store'])->middleware('auth:sanctum');
+Route::put('users/update/{userId}', [UserController::class, 'update'])->middleware('auth:sanctum');
+Route::get('users/show/{userId}', [UserController::class, 'show'])->middleware('auth:sanctum');
+Route::delete('users/destroy/{userId}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout');
 });
