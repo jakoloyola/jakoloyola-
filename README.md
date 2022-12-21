@@ -4,4 +4,4 @@ Database: seditio
 
 Username: root
 
-password:
+Password:
